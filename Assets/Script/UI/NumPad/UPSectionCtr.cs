@@ -7,9 +7,27 @@ public class UPSectionCtr : ICtr {
     public Text text;
 
 
-    public new void initialization() {
+    public override void initialization() {
         base.initialization();
         
+    }
+
+
+    private void OnEnable()
+    {
+        CanvasManager.Failed += ClearText;
+        CanvasManager.WrongNumWarning += ClearText;
+    }
+
+
+    private void OnDisable()
+    {
+        CanvasManager.Failed -= ClearText;
+        CanvasManager.WrongNumWarning -= ClearText;
+    }
+
+    private void ClearText() {
+        text.text = "";
     }
 
     public override void ShowAll()

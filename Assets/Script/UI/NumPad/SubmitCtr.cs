@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SubmitCtr : ICtr {
 
-    public new void initialization() {
+    public override void initialization() {
         base.initialization();
     }
 

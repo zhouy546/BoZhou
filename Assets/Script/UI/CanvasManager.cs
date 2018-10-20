@@ -9,12 +9,16 @@ public class CanvasManager : MonoBehaviour {
 
     public FullScreenVideoCtr screenProtectVideoCtr;
     public MainUICtr mainUICtr;
+    public InformationPadCtr informationPadCtr;
 
     public static CanvasManager instance;
 
-    public static Action Call;
-    public static Action HangupPhone;
-    public static Action StartConversation;
+    public static Action Call;//打电话
+    public static Action HangupPhone;//挂断电话
+    public static Action StartConversation;//开始对话
+    public static Action Failed;//报警失败
+    public static Action WrongNumWarning;//打错电话
+
     // Use this for initialization
     void Start () {
    
@@ -32,19 +36,14 @@ public class CanvasManager : MonoBehaviour {
     }
 
     void RegisterEvent() {
-        Call += LoadingCallingScene;
         Call += StopScreenProtect;
         
-        HangupPhone += UNLoadingCallingScene;
         HangupPhone += PlayScreenProtect;
-
-
     }
 
     void DeRegisterEvent() {
-        Call -= LoadingCallingScene;
         Call -= StopScreenProtect;
-        HangupPhone -= UNLoadingCallingScene;
+
     }
 
     private void OnEnable()
@@ -57,15 +56,9 @@ public class CanvasManager : MonoBehaviour {
         DeRegisterEvent();
     }
 
-    void LoadingCallingScene() {
-        Debug.Log("Show Gui");
-        mainUICtr.LoadingCallingScene();
-    }
 
-    void UNLoadingCallingScene() {
-        Debug.Log("Hide Gui");
-        mainUICtr.UnLoadingCallingScene();
-    }
+
+
 
     private void Update()
     {
@@ -94,11 +87,25 @@ public class CanvasManager : MonoBehaviour {
     }
 
     public static void call() {
+        Debug.Log("开始打电话");
         Call?.Invoke();
     }
 
     public static void startConversation()
     {
+        Debug.Log("开始对话");
         StartConversation?.Invoke();
+    }
+
+    public static void failed()
+    {
+        Debug.Log("失败");
+        Failed?.Invoke();
+    }
+
+    public static void wrongNumWarning()
+    {
+        Debug.Log("电话号码错误警告");
+        WrongNumWarning?.Invoke();
     }
 }

@@ -8,12 +8,9 @@ public class TimeCountDown : ICtr {
     public Text CountDonwText;
     public int CountDonwTime;
     public Image LoopRing;
-	// Use this for initialization
-	void Start () {
-        initialization();
-    }
 
-    public new  void initialization() {
+
+    public override  void initialization() {
         base.initialization();
         HideAll();
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class NumBtnCtr : ICtr {
 
 	
-	public new void initialization() {
+	public override void initialization() {
         base.initialization();
 	}
 

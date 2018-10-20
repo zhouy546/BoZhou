@@ -7,7 +7,7 @@ public class ICtr : MonoBehaviour {
     private float Show_HideTime=1f;
 
 
-    public void initialization()
+    public virtual void initialization()
     {
         NImage[] tempImages = GetComponentsInChildren<NImage>();
         AllNimages.AddRange(tempImages);
@@ -24,6 +24,7 @@ public class ICtr : MonoBehaviour {
         foreach (var item in AllNimages)
         {
             item.ShowAll(Show_HideTime);
+            item.image.raycastTarget = true;
         }
 
     }
@@ -33,7 +34,7 @@ public class ICtr : MonoBehaviour {
         foreach (var item in AllNimages)
         {
             item.HideAll(Show_HideTime);
-
+            item.image.raycastTarget = false;
 
         }
 

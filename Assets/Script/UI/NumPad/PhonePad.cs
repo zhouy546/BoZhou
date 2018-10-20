@@ -16,6 +16,20 @@ public class PhonePad : MonoBehaviour {
 
     }
 
+    private void OnEnable()
+    {
+        CanvasManager.Call += ShowPhonePad;
+        CanvasManager.HangupPhone += HidePhonePad;
+        CanvasManager.Failed += HidePhonePad;
+    }
+
+    private void OnDisable()
+    {
+        CanvasManager.Call += ShowPhonePad;
+        CanvasManager.HangupPhone += HidePhonePad;
+        CanvasManager.Failed -= HidePhonePad;
+    }
+
     public void ShowPhonePad() {
         foreach (var item in PhonePadCtr)
         {
