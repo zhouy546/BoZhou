@@ -73,7 +73,7 @@ public class CanvasManager : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.W)) {
             hangupPhone();
         } else if (Input.GetKeyDown(KeyCode.G)) {
-            startConversation();
+            answerCorrect();
         }
     }
 

@@ -21,6 +21,8 @@ public class TimeCountDown : ICtr {
         CanvasManager.StartConversation += startCoutDown;
 
         CanvasManager.Failed += HideAll;
+
+        CanvasManager.AnswerWrong += BreakCountDown;//回答错误暂停计时
     }
 
     public void OnDisable()
@@ -29,6 +31,8 @@ public class TimeCountDown : ICtr {
         CanvasManager.StartConversation -= startCoutDown;
 
         CanvasManager.Failed -= HideAll;
+
+        CanvasManager.AnswerWrong -= BreakCountDown;//
     }
 
     // Update is called once per frame

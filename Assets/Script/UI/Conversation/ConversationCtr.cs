@@ -7,8 +7,8 @@ using UnityEngine.Windows.Speech;
 public class ConversationCtr : I_step {
     public static ConversationCtr instance;
     public List<ICtr> ctrs = new List<ICtr>();
-	// Use this for initialization
-	public void initialization() {
+    // Use this for initialization
+    public void initialization() {
         if (instance == null) {
             instance = this;
         }
@@ -19,9 +19,21 @@ public class ConversationCtr : I_step {
 
             item.UpdateText("");
         }
-	}
+    }
 
+    private void OnEnable()
+    {
+        CanvasManager.AnswerCorrect += IncreaseStep;
+        CanvasManager.AnswerCorrect += UpdateFireManText;
+        CanvasManager.AnswerCorrect += UpdateMeText;
+    }
 
+    public void OnDisable()
+    {
+        CanvasManager.AnswerCorrect -= IncreaseStep;
+        CanvasManager.AnswerCorrect -= UpdateFireManText;
+        CanvasManager.AnswerCorrect -= UpdateMeText;
+    }
 
 
     public override bool ListeningStr(string str)
@@ -69,7 +81,6 @@ public class ConversationCtr : I_step {
         if (val >= ValueSheet.successRate)
         {
             // UpdateText(Asks[currentSetp]);
-            IncreaseStep();
             //判断真确
             return true;
         }
@@ -99,6 +110,25 @@ public class ConversationCtr : I_step {
     {
         base.IncreaseStep();
 
+        if (currentSetp == MaxSetp+1) {
+            Debug.Log("完成对话");
+
+            //出发事件
+            //其他脚本订阅
+            // 关闭监听，
+            //显示报警成功UI； 
+            //关闭计时
+            //重置步长
+
+        }     
+    }
+
+    public void UpdateFireManText() {
+        ctrs[0].UpdateText(Asks[currentSetp]);
+    }
+
+    public void UpdateMeText() {
+        ctrs[1].UpdateText(AnswerList[currentSetp].answer[0]);//第0个是标准答案
     }
 
     private void Update()
