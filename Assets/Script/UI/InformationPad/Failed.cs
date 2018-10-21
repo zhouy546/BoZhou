@@ -16,5 +16,6 @@ public class Failed : MonoBehaviour {
 
     public void returnBack() {
         CanvasManager.hangupPhone();
+        Submit.btn.interactable = false;
     }
 }

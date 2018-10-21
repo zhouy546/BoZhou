@@ -7,7 +7,7 @@ public class Police_Step : I_step {
 
 	// Use this for initialization
 	void Start () {
-        UpdateText("");
+        //UpdateText("");
     }
 
     public override bool ListeningStr(string str)
@@ -30,9 +30,9 @@ public class Police_Step : I_step {
        // UpdateText(str);
         List<bool> b = new List<bool>();
         int trueNum = 0;
-        for (int j = 0; j < AnswerList[i].asks.Length; j++)
+        for (int j = 0; j < AnswerList[i].answer.Length; j++)
         {
-           b.Add( check(str, AnswerList[i].asks[j]));
+           b.Add( check(str, AnswerList[i].answer[j]));
         }
 
         foreach (bool item in b)
@@ -81,46 +81,46 @@ public class Police_Step : I_step {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
           
-            UpdateText("创捷传媒", ListeningStr("创捷传媒"));
+        //    UpdateText("创捷传媒", ListeningStr("创捷传媒"));
 
-        }
-        else if(Input.GetKeyDown(KeyCode.Q)) {
+        //}
+        //else if(Input.GetKeyDown(KeyCode.Q)) {
 
-            UpdateText("110救命", ListeningStr("110救命"));
-        }
+        //    UpdateText("110救命", ListeningStr("110救命"));
+        //}
     }
 
 
  
 
-    private void UpdateText(string str,bool b) {
-        if (b)
-        {
-            currentText = str;
-            DisplayText += currentText + "\n" + Asks[currentSetp] + "\n";
+    //private void UpdateText(string str,bool b) {
+    //    if (b)
+    //    {
+    //        currentText = str;
+    //        DisplayText += currentText + "\n" + Asks[currentSetp] + "\n";
 
-            text.text = DisplayText;
-        }
-        else {
-            currentText = str;
-            DisplayText += currentText + "\n" + "请说出正确信息" + "\n";
+    //        text.text = DisplayText;
+    //    }
+    //    else {
+    //        currentText = str;
+    //        DisplayText += currentText + "\n" + "请说出正确信息" + "\n";
 
-            text.text = DisplayText;
-        }
-    }
+    //        text.text = DisplayText;
+    //    }
+    //}
 
-    private void UpdateText(string str)
-    {
+    //private void UpdateText(string str)
+    //{
        
-            currentText = str;
-            DisplayText += currentText + Asks[currentSetp] + "\n";
+    //        currentText = str;
+    //        DisplayText += currentText + Asks[currentSetp] + "\n";
 
-            text.text = DisplayText;
+    //        text.text = DisplayText;
 
-    }
+    //}
 
 
 }

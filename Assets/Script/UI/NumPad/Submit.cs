@@ -7,10 +7,11 @@ public class Submit : MonoBehaviour {
 
     public int TryNum = 2;
     public Text text;
-
+    public static Button btn;
 
     private void OnEnable()
     {
+        btn = this.GetComponent<Button>();
         CanvasManager.Failed += fail;
         CanvasManager.WrongNumWarning += warning;
         CanvasManager.Failed += restValue;
@@ -63,6 +64,7 @@ public class Submit : MonoBehaviour {
 
     public IEnumerator Connecting() {
         Debug.Log("开始动画");
+        Submit.btn.interactable = false;
         yield return new WaitForSeconds(3);
         CanvasManager.startConversation();
     }

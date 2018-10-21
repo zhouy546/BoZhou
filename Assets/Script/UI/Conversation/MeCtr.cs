@@ -1,24 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class WrongNumberCtr : ICtr {
-
+public class MeCtr : ICtr {
+    public Text text;
 	// Use this for initialization
-	public override void initialization() {
+    public	override void initialization() {
         base.initialization();
         HideAll();
-        Debug.Log("Hide warning");
 	}
 
     private void OnEnable()
     {
-        CanvasManager.WrongNumWarning += ShowAll;
+        CanvasManager.StartConversation += ShowAll;
+        CanvasManager.Failed += HideAll;
     }
 
     private void OnDisable()
     {
-        CanvasManager.WrongNumWarning -= ShowAll;
+        CanvasManager.StartConversation -= ShowAll;
+        CanvasManager.Failed -= HideAll;
+
     }
 
     public override void HideAll()
@@ -29,7 +32,9 @@ public class WrongNumberCtr : ICtr {
     public override void ShowAll()
     {
         base.ShowAll();
-        Submit.btn.interactable = false;
+    }
 
+    public override void UpdateText(string str) {
+        text.text = str;
     }
 }

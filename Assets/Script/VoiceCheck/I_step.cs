@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class I_step : MonoBehaviour {
-    public Text text;
+    //public Text text;
 
     public string currentText;
 
@@ -33,7 +33,7 @@ public class I_step : MonoBehaviour {
     [System.Serializable]
     public class Answer
     {
-       public string[] asks = new string[] { };
+       public string[] answer = new string[] { };
 
     }
 }

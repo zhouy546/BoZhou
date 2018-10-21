@@ -8,18 +8,45 @@ public class VoiceRec : MonoBehaviour {
     // Use this for initialization
     public ConfidenceLevel confidenLevel = ConfidenceLevel.Medium;
     PhraseRecognizer recognizer;
-
-    // Use this for initialization
-    void Start () {
-        recognizer = new KeywordRecognizer(keyWords, confidenLevel);
-        recognizer.OnPhraseRecognized += Display;  // 注册事件
-        recognizer.Start();
+    public ConversationCtr conversationCtr;
+    private void OnEnable()
+    {
+        CanvasManager.StartConversation += startListening;
     }
 
-    public void Display(PhraseRecognizedEventArgs args)
+    private void OnDisable()
+    {
+        CanvasManager.StartConversation -= startListening;
+    }
+
+    private void startListening() {
+
+        if (!recognizer.IsRunning) {
+            recognizer = new KeywordRecognizer(keyWords, confidenLevel);
+            recognizer.OnPhraseRecognized += mainCheck;  // 注册事件
+            
+
+            recognizer.Start();
+        }
+
+    }
+
+    public void mainCheck(PhraseRecognizedEventArgs args)
     {
         string str = args.text;
         Debug.Log(str.ToString());
+
+        if (conversationCtr.ListeningStr(str))
+        {//如果正确更新
+            CanvasManager.answerCorrect();
+        }
+        else
+        {//没能更新
+            CanvasManager.answerWrong();
+        }
+
+
     }
+
 
 }

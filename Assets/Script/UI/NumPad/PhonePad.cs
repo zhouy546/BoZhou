@@ -21,6 +21,8 @@ public class PhonePad : MonoBehaviour {
         CanvasManager.Call += ShowPhonePad;
         CanvasManager.HangupPhone += HidePhonePad;
         CanvasManager.Failed += HidePhonePad;
+        CanvasManager.StartConversation += HidePhonePad;
+
     }
 
     private void OnDisable()
@@ -28,6 +30,7 @@ public class PhonePad : MonoBehaviour {
         CanvasManager.Call += ShowPhonePad;
         CanvasManager.HangupPhone += HidePhonePad;
         CanvasManager.Failed -= HidePhonePad;
+        CanvasManager.StartConversation -= HidePhonePad;
     }
 
     public void ShowPhonePad() {
@@ -35,6 +38,7 @@ public class PhonePad : MonoBehaviour {
         {
             item.ShowAll();
         }
+        Submit.btn.interactable = true;
     }
 
     public void HidePhonePad() {

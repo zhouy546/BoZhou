@@ -19,18 +19,27 @@ public class TimeCountDown : ICtr {
     {
         CanvasManager.StartConversation += ShowAll;
         CanvasManager.StartConversation += startCoutDown;
+
+        CanvasManager.Failed += HideAll;
     }
 
     public void OnDisable()
     {
-        
+        CanvasManager.StartConversation -= ShowAll;
+        CanvasManager.StartConversation -= startCoutDown;
+
+        CanvasManager.Failed -= HideAll;
     }
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             BreakCountDown();
 
+        }
+        else if (Input.GetKeyDown(KeyCode.C)) {
+            startCoutDown();
         }
 
     }
@@ -41,7 +50,7 @@ public class TimeCountDown : ICtr {
     }
 
     public void startCoutDown() {
-        StartCoroutine(StartCountDonwText(CountDonwTime));
+        StartCoroutine(StartCountDonwText(CountDonwTime,CanvasManager.Failed));
         StartCountDownUI();
     }
 
@@ -52,13 +61,13 @@ public class TimeCountDown : ICtr {
         time--;
         if (time == 0) {
             UpdateText(time);
-            Debug.Log("触发事件");
+            Debug.Log("时间到");
             if (action != null) {
                 action();
             }
             yield break;
         }
-        StartCoroutine(StartCountDonwText(time));
+        StartCoroutine(StartCountDonwText(time, CanvasManager.Failed));
     }
 
     private void StartCountDownUI() {

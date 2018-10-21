@@ -19,6 +19,9 @@ public class CanvasManager : MonoBehaviour {
     public static Action Failed;//报警失败
     public static Action WrongNumWarning;//打错电话
 
+    public static Action AnswerCorrect;//回答正确
+    public static Action AnswerWrong;//回答错误
+
     // Use this for initialization
     void Start () {
    
@@ -107,5 +110,15 @@ public class CanvasManager : MonoBehaviour {
     {
         Debug.Log("电话号码错误警告");
         WrongNumWarning?.Invoke();
+    }
+
+    public static void answerCorrect() {
+        Debug.Log("回答正确");
+        AnswerCorrect?.Invoke();
+    }
+
+    public static void answerWrong() {
+        Debug.Log("回答错误");
+        AnswerWrong?.Invoke();
     }
 }

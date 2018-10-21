@@ -40,6 +40,11 @@ public class ICtr : MonoBehaviour {
 
     }
 
- 
+    public virtual void UpdateText(string str) {
+
+    }
+
+
+
 
 }
