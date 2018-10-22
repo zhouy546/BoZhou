@@ -21,8 +21,12 @@ public class TimeCountDown : ICtr {
         CanvasManager.StartConversation += startCoutDown;
 
         CanvasManager.Failed += HideAll;
-
+        CanvasManager.AnswerCorrect += ResetCountDown;//回答正确重置计时
         CanvasManager.AnswerWrong += BreakCountDown;//回答错误暂停计时
+
+        CanvasManager.FinishConversation += FinishCountDown;//结束对话暂停计时；
+
+
     }
 
     public void OnDisable()
@@ -31,8 +35,11 @@ public class TimeCountDown : ICtr {
         CanvasManager.StartConversation -= startCoutDown;
 
         CanvasManager.Failed -= HideAll;
-
+        CanvasManager.AnswerCorrect -= ResetCountDown;
         CanvasManager.AnswerWrong -= BreakCountDown;//
+
+        CanvasManager.FinishConversation -= FinishCountDown;//结束对话暂停计时；
+
     }
 
     // Update is called once per frame
@@ -46,6 +53,24 @@ public class TimeCountDown : ICtr {
             startCoutDown();
         }
 
+    }
+
+    public void FinishCountDown() {
+        StartCoroutine(StopCountDown());
+        HideAll();
+    }
+
+    IEnumerator StopCountDown() {
+        yield return new WaitForSeconds(.5f);
+        BreakCountDown();
+        ConversationCtr.instance.currentSetp = 0;
+    }
+
+    private void ResetCountDown() {
+        if (ConversationCtr.instance.currentSetp < ConversationCtr.instance.MaxSetp + 1) {
+            BreakCountDown();
+            startCoutDown();
+        } 
     }
 
     public void BreakCountDown() {

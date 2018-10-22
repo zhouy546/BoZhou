@@ -35,5 +35,12 @@ public class I_step : MonoBehaviour {
     {
        public string[] answer = new string[] { };
 
+        public Answer() {
+
+        }
+
+        public Answer(string[] strs) {
+            answer = strs;
+        }
     }
 }

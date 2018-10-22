@@ -3,25 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WrongNumberCtr : ICtr {
+public class SuccessCtr : ICtr {
     public Button btn;
 	// Use this for initialization
 	public override void initialization() {
         base.initialization();
         HideAll();
-        Debug.Log("Hide warning");
-	}
+    }
 
     private void OnEnable()
     {
-        CanvasManager.WrongNumWarning += ShowAll;
+        CanvasManager.FinishConversation += ShowAll;
     }
 
     private void OnDisable()
     {
-        CanvasManager.WrongNumWarning -= ShowAll;
+        CanvasManager.FinishConversation -= ShowAll;
     }
-
 
     public override void HideAll()
     {
@@ -40,8 +38,6 @@ public class WrongNumberCtr : ICtr {
             item.GetComponent<Animator>().SetBool("Show", true);
             item.image.raycastTarget = true;
         }
-        Submit.btn.interactable = false;
-
         btn.interactable = true;
     }
 }

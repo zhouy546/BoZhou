@@ -19,24 +19,43 @@ public class ConversationCtr : I_step {
 
             item.UpdateText("");
         }
+
+        Asks = ValueSheet.FireManString;
+        MaxSetp = ValueSheet.FireManString.Count - 1;
+        AnswerList = ValueSheet.MeAnswer;
     }
 
     private void OnEnable()
     {
+        CanvasManager.StartConversation += UpdateFireManText;
+        CanvasManager.StartConversation += UpdateMeText;
         CanvasManager.AnswerCorrect += IncreaseStep;
         CanvasManager.AnswerCorrect += UpdateFireManText;
         CanvasManager.AnswerCorrect += UpdateMeText;
+
+        CanvasManager.Failed += ResetAll;
+        CanvasManager.FinishConversation += ResetText;
     }
 
     public void OnDisable()
     {
+        CanvasManager.StartConversation -= UpdateFireManText;
+        CanvasManager.StartConversation-= UpdateMeText;
         CanvasManager.AnswerCorrect -= IncreaseStep;
         CanvasManager.AnswerCorrect -= UpdateFireManText;
         CanvasManager.AnswerCorrect -= UpdateMeText;
+
+        CanvasManager.Failed -= ResetAll;
+        CanvasManager.FinishConversation -= ResetText;
     }
 
 
-    public override bool ListeningStr(string str)
+    private void ResetAll() {
+        ResetText();
+        currentSetp = 0;
+    }
+
+    public override bool ListeningStr(string str)//回答长度
     {
         switch (currentSetp)
         {
@@ -45,6 +64,14 @@ public class ConversationCtr : I_step {
                 return GroupCheck(str, 0);
             case 1:
                 return GroupCheck(str, 1);
+            case 2:
+                return GroupCheck(str, 2);
+
+            case 3:
+                return GroupCheck(str, 3);
+            case 4:
+                return GroupCheck(str, 4);
+
         }
 
         return false;
@@ -112,6 +139,7 @@ public class ConversationCtr : I_step {
 
         if (currentSetp == MaxSetp+1) {
             Debug.Log("完成对话");
+            CanvasManager.finishConversation();
 
             //出发事件
             //其他脚本订阅
@@ -123,16 +151,24 @@ public class ConversationCtr : I_step {
         }     
     }
 
+
+    public void ResetText() {
+        ctrs[0].UpdateText("");
+        ctrs[1].UpdateText("");
+    }
+
+
     public void UpdateFireManText() {
-        ctrs[0].UpdateText(Asks[currentSetp]);
+        if (currentSetp < Asks.Count) {//最后一个回答真确时会超出ARRAY长度所以要检查
+            ctrs[0].UpdateText(Asks[currentSetp]);
+        }
+
     }
 
     public void UpdateMeText() {
-        ctrs[1].UpdateText(AnswerList[currentSetp].answer[0]);//第0个是标准答案
-    }
-
-    private void Update()
-    {
+        if (currentSetp < Asks.Count) {
+            ctrs[1].UpdateText(AnswerList[currentSetp].answer[0]);//第0个是标准答案
+        }
 
     }
 }

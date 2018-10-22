@@ -22,6 +22,8 @@ public class CanvasManager : MonoBehaviour {
     public static Action AnswerCorrect;//回答正确
     public static Action AnswerWrong;//回答错误
 
+    public static Action FinishConversation;
+
     // Use this for initialization
     void Start () {
    
@@ -120,5 +122,10 @@ public class CanvasManager : MonoBehaviour {
     public static void answerWrong() {
         Debug.Log("回答错误");
         AnswerWrong?.Invoke();
+    }
+
+    public static void finishConversation() {
+        Debug.Log("结束对话事件触发");
+        FinishConversation?.Invoke();
     }
 }

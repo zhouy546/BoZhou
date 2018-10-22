@@ -108,7 +108,7 @@ public class ImageBase : IRect {
     }
 
     private void CancelColorLeanTween() {
-        LeanTween.cancel(ColorLTDescr.id);
+        LeanTween.cancel(this.gameObject);
     }
 
 }

@@ -15,12 +15,16 @@ public class MeCtr : ICtr {
     {
         CanvasManager.StartConversation += ShowAll;
         CanvasManager.Failed += HideAll;
+
+        CanvasManager.FinishConversation += HideAll;
     }
 
     private void OnDisable()
     {
         CanvasManager.StartConversation -= ShowAll;
         CanvasManager.Failed -= HideAll;
+
+        CanvasManager.FinishConversation -= HideAll;
 
     }
 

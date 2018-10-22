@@ -7,19 +7,31 @@ public class VoiceRec : MonoBehaviour {
 
     public static VoiceRec instance;
     public string[] keyWords = new string[] { "确认", "开始", "返回", "暂停" };
-    // Use this for initialization
     public ConfidenceLevel confidenLevel = ConfidenceLevel.Medium;
     PhraseRecognizer recognizer;
     public ConversationCtr conversationCtr;
+
+    private int AnswerFailMaxTimes=4;
+    private int CurrentAnswerFailaTimes = 0;
+
+
+    public void initialization() {
+        keyWords = ValueSheet.keySting.ToArray();
+    }
+
     private void OnEnable()
     {
+        
         CanvasManager.StartConversation += startListening;
+        CanvasManager.FinishConversation += StopListiing;
+
         CanvasManager.AnswerWrong += StopListiing;
     }
 
     private void OnDisable()
     {
         CanvasManager.StartConversation -= startListening;
+        CanvasManager.FinishConversation -= StopListiing;
         CanvasManager.AnswerWrong -= StopListiing;
     }
 
@@ -33,11 +45,18 @@ public class VoiceRec : MonoBehaviour {
 
     public  void startListening() {
 
+        if (recognizer == null) {
+            recognizer = new KeywordRecognizer(keyWords, confidenLevel);
+            recognizer.OnPhraseRecognized += mainCheck;  // 注册事件           
+            recognizer.Start();
+            return;
+        }
+
+
+
         if (!recognizer.IsRunning) {
             recognizer = new KeywordRecognizer(keyWords, confidenLevel);
-            recognizer.OnPhraseRecognized += mainCheck;  // 注册事件
-            
-
+            recognizer.OnPhraseRecognized += mainCheck;  // 注册事件           
             recognizer.Start();
         }
 
@@ -45,6 +64,7 @@ public class VoiceRec : MonoBehaviour {
 
     public void StopListiing() {
         recognizer.Stop();
+        recognizer.Dispose();
     }
 
     public void mainCheck(PhraseRecognizedEventArgs args)
@@ -58,7 +78,16 @@ public class VoiceRec : MonoBehaviour {
         }
         else
         {//没能更新
-            CanvasManager.answerWrong();
+            CurrentAnswerFailaTimes++;
+            if (CurrentAnswerFailaTimes <= AnswerFailMaxTimes)
+            {
+                CanvasManager.answerWrong();
+            }
+            else {
+                CurrentAnswerFailaTimes = 0;
+                CanvasManager.failed();
+            }
+         
         }
 
 

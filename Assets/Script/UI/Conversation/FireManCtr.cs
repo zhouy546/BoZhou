@@ -18,13 +18,17 @@ public class FireManCtr : ICtr {
         CanvasManager.Failed += HideAll;
 
         CanvasManager.AnswerCorrect += correctGoNext;
+
+        CanvasManager.FinishConversation += HideAll;
     }
 
     private void OnDisable()
     {
         CanvasManager.StartConversation -= ShowAll;
-        CanvasManager.Failed += HideAll;
+        CanvasManager.Failed -= HideAll;
         CanvasManager.AnswerCorrect -= correctGoNext;
+
+        CanvasManager.FinishConversation -= HideAll;
 
     }
 

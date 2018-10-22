@@ -22,7 +22,7 @@ public class ReadJson : MonoBehaviour {
     int id;
     string bigTitle;
     // Use this for initialization
-    void Start () {
+    public IEnumerator initialization() {
         if (instance == null)
         {
 
@@ -30,7 +30,7 @@ public class ReadJson : MonoBehaviour {
 
         }
 
-     StartCoroutine(readJson());
+     yield return StartCoroutine(readJson());
 
     }
 
@@ -50,22 +50,40 @@ public class ReadJson : MonoBehaviour {
        itemDate = JsonMapper.ToObject(jsonString.ToString());
 
 
-        for (int i = 0; i < itemDate["information"].Count; i++)
+        getstringArray(ValueSheet.FireManString, "FireManString");
 
-        {
+        getstringArray(ValueSheet.keySting, "KeyWords");
 
-             id = int.Parse(itemDate["information"][i]["id"].ToString());//get id;
+        ValueSheet.success = itemDate["config"]["Success"].ToString();
 
-             bigTitle = itemDate["information"][i]["BigTitle"].ToString();//get bigtitle;
-
-            Debug.Log(bigTitle);
-        }
-
+        GetAnswerList();
         //setupUI(bigTitle);
 
     }
 
-    //void setupUI(string str) {
-    //    ntext.SetText(str);
-    //}
+
+    public void GetAnswerList() {
+        
+        for (int i = 0; i < itemDate["config"]["MeString"].Count; i++)
+        {
+
+            List<string> ans = new List<string>();
+            for (int j = 0; j < itemDate["config"]["MeString"][i.ToString()].Count; j++)
+            {
+                ans.Add(itemDate["config"]["MeString"][i.ToString()][j].ToString());
+            }
+         
+            ValueSheet.MeAnswer.Add(new I_step.Answer(ans.ToArray()));
+        }
+
+    }
+
+    public void getstringArray(List<string> strings,string tag) {
+        for (int i = 0; i < itemDate["config"][tag].Count; i++)
+        {
+            Debug.Log(itemDate["config"][tag][i].ToString());
+            strings.Add(itemDate["config"][tag][i].ToString());
+        }
+    }
+
 }
