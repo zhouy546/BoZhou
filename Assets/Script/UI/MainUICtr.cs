@@ -7,12 +7,14 @@ public class MainUICtr : MonoBehaviour {
     public TimeCountDown timeCountDown;
     public InformationPadCtr informationPadCtr;
     public ConversationCtr conversationCtr;
+    public VideoConnectingCtr videoConnectingCtr;
 	// Use this for initialization
 	public void initialization() {
         PhonePad.initialization();
         timeCountDown.initialization();
         informationPadCtr.initialization();
         conversationCtr.initialization();
+        videoConnectingCtr.initialization();
     }
 	
     private void OnEnable()

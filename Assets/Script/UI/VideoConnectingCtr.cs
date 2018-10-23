@@ -1,38 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class WrongNumberCtr : ICtr {
-    public Button btn;
+public class VideoConnectingCtr : ICtr {
+
 	// Use this for initialization
 	public override void initialization() {
         base.initialization();
         HideAll();
-        Debug.Log("Hide warning");
 	}
 
-    private void OnEnable()
+    public void OnEnable()
     {
-        CanvasManager.WrongNumWarning += ShowAll;
-
+        CanvasManager.Call += ShowAll;
+        CanvasManager.StartConversation += HideAll;
 
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
-        CanvasManager.WrongNumWarning -= ShowAll;
+        CanvasManager.Call -= ShowAll;
+        CanvasManager.StartConversation -= HideAll;
     }
-
 
     public override void HideAll()
     {
+
         foreach (var item in AllNimages)
         {
             item.GetComponent<Animator>().SetBool("Show", false);
             item.image.raycastTarget = false;
         }
-        btn.interactable = false;
+
     }
 
     public override void ShowAll()
@@ -42,8 +41,5 @@ public class WrongNumberCtr : ICtr {
             item.GetComponent<Animator>().SetBool("Show", true);
             item.image.raycastTarget = true;
         }
-        Submit.btn.interactable = false;
-
-        btn.interactable = true;
     }
 }

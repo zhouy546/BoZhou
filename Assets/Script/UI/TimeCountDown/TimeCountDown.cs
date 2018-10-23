@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TimeCountDown : ICtr {
+    public static TimeCountDown instance;
+
     public Text CountDonwText;
     public int CountDonwTime;
     public Image LoopRing;
@@ -12,11 +14,21 @@ public class TimeCountDown : ICtr {
 
     public override  void initialization() {
         base.initialization();
+        if (instance == null) {
+            instance = this;
+        }
+
         HideAll();
     }
 
     public void OnEnable()
     {
+
+        CanvasManager.Call += startCoutDown;
+        CanvasManager.Call += ShowAll;
+
+        CanvasManager.WrongNumWarning += BreakCountDown;
+
         CanvasManager.StartConversation += ShowAll;
         CanvasManager.StartConversation += startCoutDown;
 
@@ -31,6 +43,11 @@ public class TimeCountDown : ICtr {
 
     public void OnDisable()
     {
+        CanvasManager.Call -= startCoutDown;
+        CanvasManager.Call -= ShowAll;
+
+        CanvasManager.WrongNumWarning -= BreakCountDown;
+
         CanvasManager.StartConversation -= ShowAll;
         CanvasManager.StartConversation -= startCoutDown;
 
@@ -66,7 +83,7 @@ public class TimeCountDown : ICtr {
         ConversationCtr.instance.currentSetp = 0;
     }
 
-    private void ResetCountDown() {
+    public void ResetCountDown() {
         if (ConversationCtr.instance.currentSetp < ConversationCtr.instance.MaxSetp + 1) {
             BreakCountDown();
             startCoutDown();

@@ -46,6 +46,7 @@ public class Submit : MonoBehaviour {
 
             StartCoroutine(Connecting());
 
+
         }
         else {
             TryNum--;
@@ -65,6 +66,8 @@ public class Submit : MonoBehaviour {
     public IEnumerator Connecting() {
         Debug.Log("开始动画");
         Submit.btn.interactable = false;
+        TimeCountDown.instance.BreakCountDown();
+
         yield return new WaitForSeconds(3);
         CanvasManager.startConversation();
     }

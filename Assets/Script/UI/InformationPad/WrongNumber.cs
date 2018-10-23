@@ -9,5 +9,7 @@ public class WrongNumber : MonoBehaviour {
     public void HideMe() {
         wrongNumberCtr.HideAll();
         Submit.btn.interactable = true;
+        TimeCountDown.instance.BreakCountDown();
+        TimeCountDown.instance.startCoutDown();
     }
 }

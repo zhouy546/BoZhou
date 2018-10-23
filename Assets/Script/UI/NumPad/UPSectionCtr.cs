@@ -39,7 +39,7 @@ public class UPSectionCtr : ICtr {
 
         LeanTween.value(0, 1, .5f).setOnUpdate(delegate (float val)
         {
-            text.color = new Color(1, 1, 1, val);
+            text.color = new Color(250f/255f, 197f/255f, 0, val);
         });
 
     }
@@ -52,7 +52,7 @@ public class UPSectionCtr : ICtr {
         }
         LeanTween.value(1, 0, .5f).setOnUpdate(delegate (float val)
         {
-            text.color = new Color(1, 1, 1, val);
+            text.color = new Color(250f / 255f, 197f / 255f, 0, val);
         });
     }
 
