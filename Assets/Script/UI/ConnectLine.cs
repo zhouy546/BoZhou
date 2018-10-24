@@ -15,13 +15,16 @@ public class ConnectLine : ICtr {
     {
         CanvasManager.Failed += HideAll;
         CanvasManager.FinishConversation += HideAll;
-        
-        
+
+        CanvasManager.HangupPhone += HideAll;
     }
 
     public void OnDisable()
     {
-        
+        CanvasManager.Failed -= HideAll;
+        CanvasManager.FinishConversation -= HideAll;
+
+        CanvasManager.HangupPhone -= HideAll;
     }
 
     public override void HideAll()

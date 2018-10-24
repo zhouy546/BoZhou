@@ -26,23 +26,23 @@ public class Ini : MonoBehaviour {
         readJson = FindObjectOfType<ReadJson>();
         voiceRec = FindObjectOfType<VoiceRec>();
         //------------------------ini--------------
-        yield return StartCoroutine(ReadMePic());
+        //yield return StartCoroutine(ReadMePic());
        yield return StartCoroutine(readJson.initialization());
         CanvasManager.initialization();
         voiceRec.initialization();
 
     }
 
-    IEnumerator ReadMePic()
-    {
+    //IEnumerator ReadMePic()
+    //{
 
-            List<Sprite> sp = new List<Sprite>();
-        string path = "/ConversationPic/Me/";
-            // Debug.Log(path);
-            yield return GetSpriteListFromStreamAsset(path, "jpg", sp);
+    //        List<Sprite> sp = new List<Sprite>();
+    //    string path = "/ConversationPic/Me/";
+    //        // Debug.Log(path);
+    //        yield return GetSpriteListFromStreamAsset(path, "jpg", sp);
 
-        ValueSheet.meSprites = sp;
-    }
+    //    ValueSheet.meSprites = sp;
+    //}
 
 
     IEnumerator GetSpriteListFromStreamAsset(string path, string suffix, List<Sprite> sprites)

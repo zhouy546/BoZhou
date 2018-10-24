@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SuccessCtr : ICtr {
-    public Button btn;
+
 	// Use this for initialization
 	public override void initialization() {
         base.initialization();
@@ -28,16 +28,26 @@ public class SuccessCtr : ICtr {
             item.GetComponent<Animator>().SetBool("Show", false);
             item.image.raycastTarget = false;
         }
-        btn.interactable = false;
+ 
     }
 
     public override void ShowAll()
+    {
+        StartCoroutine(show());
+    }
+
+    private IEnumerator show()
     {
         foreach (var item in AllNimages)
         {
             item.GetComponent<Animator>().SetBool("Show", true);
             item.image.raycastTarget = true;
         }
-        btn.interactable = true;
+        Submit.btn.interactable = false;
+
+        yield return new WaitForSeconds(8f);
+
+        HideAll();
+        CanvasManager.instance.PlayScreenProtect();
     }
 }

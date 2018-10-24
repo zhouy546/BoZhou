@@ -33,6 +33,10 @@ public class ConversationCtr : I_step {
         CanvasManager.AnswerCorrect += UpdateFireManText;
         CanvasManager.AnswerCorrect += UpdateMeText;
 
+
+        CanvasManager.HangupPhone += ResetAll;
+        CanvasManager.HangupPhone += ResetText;
+
         CanvasManager.Failed += ResetAll;
         CanvasManager.FinishConversation += ResetText;
     }
@@ -44,6 +48,9 @@ public class ConversationCtr : I_step {
         CanvasManager.AnswerCorrect -= IncreaseStep;
         CanvasManager.AnswerCorrect -= UpdateFireManText;
         CanvasManager.AnswerCorrect -= UpdateMeText;
+
+        CanvasManager.HangupPhone -= ResetAll;
+        CanvasManager.HangupPhone -= ResetText;
 
         CanvasManager.Failed -= ResetAll;
         CanvasManager.FinishConversation -= ResetText;
@@ -175,6 +182,11 @@ public class ConversationCtr : I_step {
 
     public void UpdateMePic()
     {
-        ctrs[1].UpdatePic(currentSetp);
+        if (currentSetp > 1)
+        {
+            ctrs[1].UpdatePic(currentSetp-2);
+        }
+
+
     }
 }

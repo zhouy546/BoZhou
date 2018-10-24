@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class FailedCtr : ICtr {
 
-    public  Button btn;
     public override void initialization() {
         base.initialization();
         HideAll();
@@ -32,17 +31,28 @@ public class FailedCtr : ICtr {
             item.image.raycastTarget = false;
         }
 
-        btn.interactable = false;
     }
 
     public override void ShowAll()
+    {
+        StartCoroutine(show());
+
+    }
+
+
+    private IEnumerator show()
     {
         foreach (var item in AllNimages)
         {
             item.GetComponent<Animator>().SetBool("Show", true);
             item.image.raycastTarget = true;
         }
+        Submit.btn.interactable = false;
 
-        btn.interactable = true;
+        yield return new WaitForSeconds(3f);
+
+        HideAll();
+        CanvasManager.hangupPhone();
+        Submit.btn.interactable = true;
     }
 }

@@ -15,5 +15,7 @@ public class ValueSheet : MonoBehaviour {
 
     public static string success;
 
-    public static List<Sprite> meSprites = new List<Sprite>();
+    //public static List<Sprite> meSprites = new List<Sprite>();
+
+    public static int AnswerFailMaxTimes = 2;
 }

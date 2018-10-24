@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class WrongNumberCtr : ICtr {
-    public Button btn;
+    //public Button btn;
 	// Use this for initialization
 	public override void initialization() {
         base.initialization();
@@ -32,11 +32,18 @@ public class WrongNumberCtr : ICtr {
             item.GetComponent<Animator>().SetBool("Show", false);
             item.image.raycastTarget = false;
         }
-        btn.interactable = false;
+        Submit.btn.interactable = true;
+        //  btn.interactable = false;
     }
 
     public override void ShowAll()
     {
+        StartCoroutine(show());
+
+      //  btn.interactable = true;
+    }
+
+    private IEnumerator show() {
         foreach (var item in AllNimages)
         {
             item.GetComponent<Animator>().SetBool("Show", true);
@@ -44,6 +51,8 @@ public class WrongNumberCtr : ICtr {
         }
         Submit.btn.interactable = false;
 
-        btn.interactable = true;
+        yield return new WaitForSeconds(2f);
+
+        HideAll();
     }
 }

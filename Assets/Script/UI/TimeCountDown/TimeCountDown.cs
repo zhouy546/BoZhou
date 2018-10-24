@@ -8,6 +8,8 @@ public class TimeCountDown : ICtr {
     public static TimeCountDown instance;
 
     public Text CountDonwText;
+
+    public Text MainText;
     public int CountDonwTime;
     public Image LoopRing;
 
@@ -27,7 +29,7 @@ public class TimeCountDown : ICtr {
         CanvasManager.Call += startCoutDown;
         CanvasManager.Call += ShowAll;
 
-        CanvasManager.WrongNumWarning += BreakCountDown;
+        //CanvasManager.WrongNumWarning += BreakCountDown;
 
         CanvasManager.StartConversation += ShowAll;
         CanvasManager.StartConversation += startCoutDown;
@@ -37,7 +39,11 @@ public class TimeCountDown : ICtr {
         CanvasManager.AnswerWrong += BreakCountDown;//回答错误暂停计时
 
         CanvasManager.FinishConversation += FinishCountDown;//结束对话暂停计时；
+        CanvasManager.Failed += FinishCountDown;//失败时暂停计时；
 
+
+
+        CanvasManager.HangupPhone += FinishCountDown;
 
     }
 
@@ -46,7 +52,7 @@ public class TimeCountDown : ICtr {
         CanvasManager.Call -= startCoutDown;
         CanvasManager.Call -= ShowAll;
 
-        CanvasManager.WrongNumWarning -= BreakCountDown;
+        //CanvasManager.WrongNumWarning -= BreakCountDown;
 
         CanvasManager.StartConversation -= ShowAll;
         CanvasManager.StartConversation -= startCoutDown;
@@ -56,6 +62,9 @@ public class TimeCountDown : ICtr {
         CanvasManager.AnswerWrong -= BreakCountDown;//
 
         CanvasManager.FinishConversation -= FinishCountDown;//结束对话暂停计时；
+
+
+        CanvasManager.HangupPhone = FinishCountDown;
 
     }
 
@@ -92,6 +101,8 @@ public class TimeCountDown : ICtr {
 
     public void BreakCountDown() {
         StopAllCoroutines();
+
+        Debug.Log("running");
         LeanTween.cancelAll();
     }
 
@@ -135,7 +146,8 @@ public class TimeCountDown : ICtr {
 
         LeanTween.value(1, 0, .5f).setOnUpdate(delegate (float val)
         {
-            CountDonwText.color = new Color(1, 1, 1, val);
+            MainText .color= CountDonwText.color = new Color(CountDonwText.color.r, CountDonwText.color.g, CountDonwText.color.b, val);
+
         });
     }
 
@@ -145,7 +157,7 @@ public class TimeCountDown : ICtr {
 
         LeanTween.value(0, 1, .5f).setOnUpdate(delegate (float val)
         {
-            CountDonwText.color = new Color(1, 1, 1, val);
+            MainText.color= CountDonwText.color = new Color(CountDonwText.color.r, CountDonwText.color.g, CountDonwText.color.b, val);
         });
     }
 

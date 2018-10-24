@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class MeCtr : ICtr {
     public Text text;
-    public NImage MePic;
+
+    public List<Animator> animators = new List<Animator>();
+   // public NImage MePic;
 	// Use this for initialization
     public	override void initialization() {
         base.initialization();
@@ -18,6 +20,8 @@ public class MeCtr : ICtr {
         CanvasManager.Failed += HideAll;
 
         CanvasManager.FinishConversation += HideAll;
+
+        CanvasManager.HangupPhone += HideAll;
     }
 
     private void OnDisable()
@@ -27,11 +31,18 @@ public class MeCtr : ICtr {
 
         CanvasManager.FinishConversation -= HideAll;
 
+        CanvasManager.HangupPhone -= HideAll;
+
     }
 
     public override void HideAll()
     {
         base.HideAll();
+
+        foreach (var item in animators)
+        {
+            item.SetBool("Show", false);
+        }
     }
 
     public override void ShowAll()
@@ -44,6 +55,21 @@ public class MeCtr : ICtr {
     }
 
     public override void UpdatePic(int num) {
-        MePic.image.sprite = ValueSheet.meSprites[num];
+
+
+        foreach (var item in animators)
+        {
+
+            if (num == animators.IndexOf(item))
+            {
+                item.SetBool("Show", true);
+            }
+            else {
+                item.SetBool("Show", false);
+            }
+           
+        }
+
+       // MePic.image.sprite = ValueSheet.meSprites[num];
     }
 }

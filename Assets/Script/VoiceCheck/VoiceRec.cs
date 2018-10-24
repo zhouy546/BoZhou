@@ -11,12 +11,14 @@ public class VoiceRec : MonoBehaviour {
     PhraseRecognizer recognizer;
     public ConversationCtr conversationCtr;
 
-    private int AnswerFailMaxTimes=4;
+    private int AnswerFailMaxTimes;
     private int CurrentAnswerFailaTimes = 0;
 
 
     public void initialization() {
         keyWords = ValueSheet.keySting.ToArray();
+
+        AnswerFailMaxTimes = ValueSheet.AnswerFailMaxTimes;
     }
 
     private void OnEnable()
@@ -26,6 +28,8 @@ public class VoiceRec : MonoBehaviour {
         CanvasManager.FinishConversation += StopListiing;
 
         CanvasManager.AnswerWrong += StopListiing;
+
+        CanvasManager.HangupPhone += StopListiing;
     }
 
     private void OnDisable()
@@ -33,6 +37,8 @@ public class VoiceRec : MonoBehaviour {
         CanvasManager.StartConversation -= startListening;
         CanvasManager.FinishConversation -= StopListiing;
         CanvasManager.AnswerWrong -= StopListiing;
+
+        CanvasManager.HangupPhone -= StopListiing;
     }
 
 
@@ -63,8 +69,12 @@ public class VoiceRec : MonoBehaviour {
     }
 
     public void StopListiing() {
-        recognizer.Stop();
-        recognizer.Dispose();
+        if (recognizer != null) {
+            recognizer.Stop();
+            recognizer.Dispose();
+        }
+
+
     }
 
     public void mainCheck(PhraseRecognizedEventArgs args)

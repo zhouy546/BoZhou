@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WrongAnswerWarningCtr : ICtr {
 
 
-    public Button btn;
+
     // Use thi s for initialization
     public override void initialization()
     {
@@ -17,6 +17,7 @@ public class WrongAnswerWarningCtr : ICtr {
     private void OnEnable()
     {
         CanvasManager.AnswerWrong += ShowAll;
+
     }
 
     private void OnDisable()
@@ -31,16 +32,28 @@ public class WrongAnswerWarningCtr : ICtr {
             item.GetComponent<Animator>().SetBool("Show", false);
             item.image.raycastTarget = false;
         }
-        btn.interactable = false;
+
     }
 
     public override void ShowAll()
     {
+        StartCoroutine(show());
+    }
+
+    public IEnumerator show() {
         foreach (var item in AllNimages)
         {
             item.GetComponent<Animator>().SetBool("Show", true);
             item.image.raycastTarget = true;
         }
-        btn.interactable = true;
+
+        yield return new WaitForSeconds(2f);
+
+        HideAll();
+
+        TimeCountDown.instance.startCoutDown();//返回后重新计时；
+
+        VoiceRec.instance.startListening();//重新开始监听
+
     }
 }

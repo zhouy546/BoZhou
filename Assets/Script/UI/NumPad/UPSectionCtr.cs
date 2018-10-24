@@ -17,6 +17,8 @@ public class UPSectionCtr : ICtr {
     {
         CanvasManager.Failed += ClearText;
         CanvasManager.WrongNumWarning += ClearText;
+
+        CanvasManager.HangupPhone += ClearText;
     }
 
 
@@ -24,6 +26,8 @@ public class UPSectionCtr : ICtr {
     {
         CanvasManager.Failed -= ClearText;
         CanvasManager.WrongNumWarning -= ClearText;
+
+        CanvasManager.HangupPhone -= ClearText;
     }
 
     private void ClearText() {

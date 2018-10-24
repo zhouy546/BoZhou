@@ -23,6 +23,7 @@ public class PhonePad : MonoBehaviour {
         CanvasManager.Failed += HidePhonePad;
         CanvasManager.StartConversation += HidePhonePad;
 
+
     }
 
     private void OnDisable()
