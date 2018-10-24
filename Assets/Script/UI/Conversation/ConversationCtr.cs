@@ -168,7 +168,13 @@ public class ConversationCtr : I_step {
     public void UpdateMeText() {
         if (currentSetp < Asks.Count) {
             ctrs[1].UpdateText(AnswerList[currentSetp].answer[0]);//第0个是标准答案
+            UpdateMePic();
         }
 
+    }
+
+    public void UpdateMePic()
+    {
+        ctrs[1].UpdatePic(currentSetp);
     }
 }

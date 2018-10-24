@@ -45,6 +45,8 @@ public class ICtr : MonoBehaviour {
     }
 
 
+    public virtual void UpdatePic(int num) {
 
+    }
 
 }

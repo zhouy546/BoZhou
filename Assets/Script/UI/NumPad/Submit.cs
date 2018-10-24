@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Submit : MonoBehaviour {
-
+    public ConnectLine connectLine;
     public int TryNum = 2;
     public Text text;
     public static Button btn;
@@ -67,7 +67,7 @@ public class Submit : MonoBehaviour {
         Debug.Log("开始动画");
         Submit.btn.interactable = false;
         TimeCountDown.instance.BreakCountDown();
-
+        connectLine.ShowAll();
         yield return new WaitForSeconds(3);
         CanvasManager.startConversation();
     }

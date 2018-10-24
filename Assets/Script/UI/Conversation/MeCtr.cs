@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MeCtr : ICtr {
     public Text text;
+    public NImage MePic;
 	// Use this for initialization
     public	override void initialization() {
         base.initialization();
@@ -40,5 +41,9 @@ public class MeCtr : ICtr {
 
     public override void UpdateText(string str) {
         text.text = str;
+    }
+
+    public override void UpdatePic(int num) {
+        MePic.image.sprite = ValueSheet.meSprites[num];
     }
 }

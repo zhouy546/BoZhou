@@ -8,6 +8,7 @@ public class MainUICtr : MonoBehaviour {
     public InformationPadCtr informationPadCtr;
     public ConversationCtr conversationCtr;
     public VideoConnectingCtr videoConnectingCtr;
+    public ConnectLine connectLine;
 	// Use this for initialization
 	public void initialization() {
         PhonePad.initialization();
@@ -15,6 +16,7 @@ public class MainUICtr : MonoBehaviour {
         informationPadCtr.initialization();
         conversationCtr.initialization();
         videoConnectingCtr.initialization();
+        connectLine.initialization();
     }
 	
     private void OnEnable()

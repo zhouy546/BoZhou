@@ -14,4 +14,6 @@ public class ValueSheet : MonoBehaviour {
     public static List<string> keySting = new List<string>();
 
     public static string success;
+
+    public static List<Sprite> meSprites = new List<Sprite>();
 }
