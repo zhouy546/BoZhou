@@ -9,6 +9,7 @@ public class MainUICtr : MonoBehaviour {
     public ConversationCtr conversationCtr;
     public VideoConnectingCtr videoConnectingCtr;
     public ConnectLine connectLine;
+    public FinishScene finishScene;
 	// Use this for initialization
 	public void initialization() {
         PhonePad.initialization();
@@ -17,6 +18,7 @@ public class MainUICtr : MonoBehaviour {
         conversationCtr.initialization();
         videoConnectingCtr.initialization();
         connectLine.initialization();
+        finishScene.initialization();
     }
 	
     private void OnEnable()

@@ -19,6 +19,9 @@ public class UPSectionCtr : ICtr {
         CanvasManager.WrongNumWarning += ClearText;
 
         CanvasManager.HangupPhone += ClearText;
+
+        CanvasManager.StartConversation += ClearText;
+        CanvasManager.FinishConversation += ClearText;
     }
 
 
@@ -28,6 +31,10 @@ public class UPSectionCtr : ICtr {
         CanvasManager.WrongNumWarning -= ClearText;
 
         CanvasManager.HangupPhone -= ClearText;
+        CanvasManager.StartConversation -= ClearText;
+        CanvasManager.FinishConversation -= ClearText;
+
+
     }
 
     private void ClearText() {
