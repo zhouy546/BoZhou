@@ -68,7 +68,9 @@ public class Submit : MonoBehaviour {
         Submit.btn.interactable = false;
         TimeCountDown.instance.BreakCountDown();
         connectLine.ShowAll();
-        yield return new WaitForSeconds(3);
+        SoundManager.instance.playConnecting();
+        yield return new WaitForSeconds(6);
+        SoundManager.instance.StopBGM();
         CanvasManager.startConversation();
     }
 

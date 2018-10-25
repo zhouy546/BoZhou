@@ -10,6 +10,8 @@ public class Ini : MonoBehaviour {
 
     VoiceRec voiceRec;
 
+    SoundManager soundManager;
+
 
     // Use this for initialization
     void Start () {
@@ -25,11 +27,14 @@ public class Ini : MonoBehaviour {
         CanvasManager = FindObjectOfType<CanvasManager>();
         readJson = FindObjectOfType<ReadJson>();
         voiceRec = FindObjectOfType<VoiceRec>();
+        soundManager = FindObjectOfType<SoundManager>();
+
         //------------------------ini--------------
         //yield return StartCoroutine(ReadMePic());
        yield return StartCoroutine(readJson.initialization());
         CanvasManager.initialization();
         voiceRec.initialization();
+        soundManager.initialization();
 
     }
 
