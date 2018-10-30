@@ -45,7 +45,7 @@ public class SuccessCtr : ICtr {
         }
         Submit.btn.interactable = false;
 
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(15f);
 
         HideAll();
         CanvasManager.instance.PlayScreenProtect();

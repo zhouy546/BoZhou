@@ -19,12 +19,12 @@ public class SoundManager : MonoBehaviour {
 
     private void OnEnable()
     {
-           
+        CanvasManager.HangupPhone += StopFireManVoiceOver;
     }
 
     private void OnDisable()
     {
-        
+        CanvasManager.HangupPhone -= StopFireManVoiceOver;
     }
 
     public void PlayFireManVoiceOver(int num) {

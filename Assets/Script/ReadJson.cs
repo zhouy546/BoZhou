@@ -37,7 +37,7 @@ public class ReadJson : MonoBehaviour {
     IEnumerator readJson() {
         string spath = Application.streamingAssetsPath + "/information.json";
 
-        Debug.Log(spath);
+      //  Debug.Log(spath);
 
         WWW www = new WWW(spath);
 
@@ -81,7 +81,7 @@ public class ReadJson : MonoBehaviour {
     public void getstringArray(List<string> strings,string tag) {
         for (int i = 0; i < itemDate["config"][tag].Count; i++)
         {
-            Debug.Log(itemDate["config"][tag][i].ToString());
+            //Debug.Log(itemDate["config"][tag][i].ToString());
             strings.Add(itemDate["config"][tag][i].ToString());
         }
     }

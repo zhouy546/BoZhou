@@ -168,6 +168,7 @@ public class ConversationCtr : I_step {
     public void UpdateFireManText() {
         if (currentSetp < Asks.Count) {//最后一个回答真确时会超出ARRAY长度所以要检查
             ctrs[0].UpdateText(Asks[currentSetp]);
+            SoundManager.instance.PlayFireManVoiceOver(currentSetp);
         }
 
     }

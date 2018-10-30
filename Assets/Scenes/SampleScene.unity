@@ -1595,6 +1595,7 @@ GameObject:
   - component: {fileID: 282840812}
   - component: {fileID: 282840817}
   - component: {fileID: 282840816}
+  - component: {fileID: 282840818}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1708,6 +1709,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bf8eb7f4eabc3439c576a8c8aff249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &282840818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 282840810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ae137458af83e4e81659556bf71cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portName: COM2
+  baudRate: 9600
+  parity: 0
+  dataBits: 8
+  stopBits: 1
+  Status: 
 --- !u!1 &316210262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,10 +1782,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -7057,7 +7075,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38bdfe89f52dfa64a852a7fb44bb5e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioClips:
+  - {fileID: 8300000, guid: 3eb89b4e2c7dab64292c90e61d1d38e5, type: 3}
+  - {fileID: 8300000, guid: 37e93577487fcc84c8ecdfe26d0a6f32, type: 3}
+  - {fileID: 8300000, guid: a3532f6d6f4b486428a4f6f5a44da4d4, type: 3}
+  - {fileID: 8300000, guid: c471f63d6ad876c4e9e1de123cfd0e77, type: 3}
+  - {fileID: 8300000, guid: c1db292bc8d217847a3846281cb1ec81, type: 3}
+  - {fileID: 8300000, guid: 3170966ba8b4cfd4b819359e659c811e, type: 3}
   AudioBgm:
   - {fileID: 8300000, guid: fb9080e1789ad5f4498fc0100804db6e, type: 3}
   FireManVoiceOverAudioSource: {fileID: 588121052}
@@ -7597,8 +7621,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -15, y: 0}
-  m_SizeDelta: {x: -90, y: 60}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -70, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1951069515
 MonoBehaviour:

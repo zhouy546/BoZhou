@@ -47,6 +47,8 @@ public class FinishScene : ICtr {
         {
             text.color = new Color(text.color.r, text.color.g, text.color.b, val);
         });
+
+        SoundManager.instance.PlayFireManVoiceOver(SoundManager.instance.audioClips.Length-1);
     }
 
     public void PlayAnimation() {
