@@ -54,6 +54,8 @@ public class ReadJson : MonoBehaviour {
 
         getstringArray(ValueSheet.keySting, "KeyWords");
 
+       
+
         ValueSheet.success = itemDate["config"]["Success"].ToString();
 
         GetAnswerList();
@@ -72,8 +74,14 @@ public class ReadJson : MonoBehaviour {
             {
                 ans.Add(itemDate["config"]["MeString"][i.ToString()][j].ToString());
             }
-         
-            ValueSheet.MeAnswer.Add(new I_step.Answer(ans.ToArray()));
+
+            List<float> val = new List<float>();
+            for (int j = 0; j < itemDate["config"]["Value"][i.ToString()].Count; j++)
+            {
+                val.Add(float.Parse(itemDate["config"]["Value"][i.ToString()][j].ToString()));
+            }
+
+            ValueSheet.MeAnswer.Add(new I_step.Answer(ans.ToArray(), val.ToArray()));
         }
 
     }
@@ -85,5 +93,8 @@ public class ReadJson : MonoBehaviour {
             strings.Add(itemDate["config"][tag][i].ToString());
         }
     }
+
+
+
 
 }

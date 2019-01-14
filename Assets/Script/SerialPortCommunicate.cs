@@ -41,7 +41,10 @@ public class SerialPortCommunicate : MonoBehaviour {
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.L)) {
+            switcher = false;
+            CanvasManager.call();
+        }
     }
 
     bool switcher = false;
@@ -167,7 +170,7 @@ public class SerialPortCommunicate : MonoBehaviour {
                 {
                     if (ex.GetType() != typeof(ThreadAbortException))
                     {
-                        Debug.Log(ex.Message+"拿起电话");
+                        //Debug.Log(ex.Message+"拿起电话");
 
 
                         Status = "接通";

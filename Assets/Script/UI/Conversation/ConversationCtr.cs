@@ -93,23 +93,25 @@ public class ConversationCtr : I_step {
     public bool GroupCheck(string str, int i)
     {
         // UpdateText(str);
-        List<bool> b = new List<bool>();
-        int trueNum = 0;
+        // List<bool> b = new List<bool>();
+
+        float val = 0;
+       // int trueNum = 0;
         for (int j = 0; j < AnswerList[i].answer.Length; j++)
         {
-            b.Add(check(str, AnswerList[i].answer[j]));
+            val+=check(str, AnswerList[i].answer[j], AnswerList[i].answerValue[j]);
         }
 
-        foreach (bool item in b)
-        {
-            if (item)
-            {
-                trueNum++;
-            }
-        }
+        //foreach (bool item in b)
+        //{
+        //    if (item)
+        //    {
+        //        trueNum++;
+        //    }
+        //}
 
 
-        float val = (float)trueNum / (float)b.Count;
+        //float val = (float)trueNum / (float)b.Count;
 
         Debug.Log(val);
         if (val >= ValueSheet.successRate)
@@ -126,17 +128,17 @@ public class ConversationCtr : I_step {
         }
     }
 
-    public bool check(string str, string strCheck)
+    public float check(string str, string strCheck,float val )
     {
 
         if (str.Contains(strCheck))
         {
 
-            return true;
+            return val;
         }
         else
         {
-            return false;
+            return 0f;
         }
     }
 

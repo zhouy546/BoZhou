@@ -34,6 +34,7 @@ public class I_step : MonoBehaviour {
     public class Answer
     {
        public string[] answer = new string[] { };
+        public float[] answerValue = new float[] { };
 
         public Answer() {
 
@@ -41,6 +42,13 @@ public class I_step : MonoBehaviour {
 
         public Answer(string[] strs) {
             answer = strs;
+        }
+
+        public Answer(string[] strs,float[] vals)
+        {
+            answer = strs;
+            answerValue = vals;
+
         }
     }
 }

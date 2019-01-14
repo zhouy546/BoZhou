@@ -13,6 +13,8 @@ public class ValueSheet : MonoBehaviour {
 
     public static List<string> keySting = new List<string>();
 
+    public static List<float> AnswerValue = new List<float>();
+
     public static string success;
 
     //public static List<Sprite> meSprites = new List<Sprite>();

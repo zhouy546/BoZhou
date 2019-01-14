@@ -23,6 +23,7 @@ public class Ini : MonoBehaviour {
 
     private IEnumerator initialization()
     {
+        Screen.SetResolution(768, 1024, true);
         //----------------------
         CanvasManager = FindObjectOfType<CanvasManager>();
         readJson = FindObjectOfType<ReadJson>();
