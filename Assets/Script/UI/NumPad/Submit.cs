@@ -34,6 +34,13 @@ public class Submit : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M)) {
+            CanvasManager.startConversation();
+        }
+    }
+
     void warning() {
         Debug.Log("出现提示");
     }

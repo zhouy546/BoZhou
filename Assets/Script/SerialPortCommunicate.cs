@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class SerialPortCommunicate : MonoBehaviour {
     //定义基本信息
-    public string portName = "COM2";
+    public string portName = "COM1";
     public int baudRate = 9600;
     public Parity parity = Parity.None;
     public int dataBits = 8;
@@ -42,6 +42,8 @@ public class SerialPortCommunicate : MonoBehaviour {
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.L)) {
+
+            Debug.Log("call");
             switcher = false;
             CanvasManager.call();
         }

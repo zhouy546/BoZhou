@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ConnectLine : ICtr {
-    
+    public Animator animator;
 	// Use this for initialization
 	public override void initialization() {
         base.initialization();
@@ -17,6 +17,7 @@ public class ConnectLine : ICtr {
         CanvasManager.FinishConversation += HideAll;
 
         CanvasManager.HangupPhone += HideAll;
+        CanvasManager.StartConversation += HideAll;
     }
 
     public void OnDisable()
@@ -25,15 +26,16 @@ public class ConnectLine : ICtr {
         CanvasManager.FinishConversation -= HideAll;
 
         CanvasManager.HangupPhone -= HideAll;
+        CanvasManager.StartConversation -= HideAll;
     }
 
     public override void HideAll()
     {
-        base.HideAll();
+        animator.SetBool("Show", false);
     }
 
     public override void ShowAll()
     {
-        base.ShowAll();
+        animator.SetBool("Show", true);
     }
 }

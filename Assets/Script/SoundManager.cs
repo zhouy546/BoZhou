@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour {
     public AudioSource FireManVoiceOverAudioSource;
     public AudioSource BGM;
 
+    public AudioClip HintClip;
+
     public void initialization() {
         if (instance == null) {
             instance = this;
@@ -20,12 +22,29 @@ public class SoundManager : MonoBehaviour {
     private void OnEnable()
     {
         CanvasManager.HangupPhone += StopFireManVoiceOver;
+        CanvasManager.Call += PlayHint;
+        CanvasManager.StartConversation += StopHint;
+        CanvasManager.Failed += StopHint;
+
+
     }
 
     private void OnDisable()
     {
         CanvasManager.HangupPhone -= StopFireManVoiceOver;
+        CanvasManager.Call -= PlayHint;
+        CanvasManager.StartConversation -= StopHint;
+        CanvasManager.Failed -= StopHint;
     }
+
+    public void PlayHint() {
+        PlayBGM(HintClip);
+    }
+
+    public void StopHint() {
+        StopBGM();
+    }
+
 
     public void PlayFireManVoiceOver(int num) {
         FireManVoiceOverAudioSource.PlayOneShot(audioClips[num]);
